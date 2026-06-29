@@ -5,3 +5,11 @@
 **/obj/
 
 **/packages/
+
+**/.claude
+**/.codegraph
+**/.cursor
+**/.gemini
+.mcp.json
+AGENTS.md
+CLAUDE.md
