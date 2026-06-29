@@ -1,0 +1,174 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v10.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v10.0": {
+      "AdminCore/1.0.0": {
+        "dependencies": {
+          "Microsoft.AspNetCore.SystemWebAdapters.CoreServices": "2.3.0",
+          "Yarp.ReverseProxy": "2.0.1"
+        },
+        "runtime": {
+          "AdminCore.dll": {}
+        }
+      },
+      "Microsoft.AspNetCore.SystemWebAdapters/2.3.0": {
+        "dependencies": {
+          "System.Runtime.Caching": "10.0.0"
+        },
+        "runtime": {
+          "lib/net10.0/Microsoft.AspNetCore.SystemWebAdapters.dll": {
+            "assemblyVersion": "2.3.0.0",
+            "fileVersion": "2.300.26.11002"
+          }
+        }
+      },
+      "Microsoft.AspNetCore.SystemWebAdapters.Abstractions/2.3.0": {
+        "dependencies": {
+          "Microsoft.AspNetCore.SystemWebAdapters": "2.3.0"
+        },
+        "runtime": {
+          "lib/netstandard2.0/Microsoft.AspNetCore.SystemWebAdapters.Abstractions.dll": {
+            "assemblyVersion": "2.3.0.0",
+            "fileVersion": "2.300.26.11002"
+          }
+        }
+      },
+      "Microsoft.AspNetCore.SystemWebAdapters.CoreServices/2.3.0": {
+        "dependencies": {
+          "Microsoft.AspNetCore.SystemWebAdapters": "2.3.0",
+          "Microsoft.AspNetCore.SystemWebAdapters.Abstractions": "2.3.0"
+        },
+        "runtime": {
+          "lib/net10.0/Microsoft.AspNetCore.SystemWebAdapters.CoreServices.dll": {
+            "assemblyVersion": "2.3.0.0",
+            "fileVersion": "2.300.26.11002"
+          }
+        }
+      },
+      "System.Configuration.ConfigurationManager/10.0.0": {
+        "dependencies": {
+          "System.Security.Cryptography.ProtectedData": "10.0.0"
+        },
+        "runtime": {
+          "lib/net10.0/System.Configuration.ConfigurationManager.dll": {
+            "assemblyVersion": "10.0.0.0",
+            "fileVersion": "10.0.25.52411"
+          }
+        }
+      },
+      "System.IO.Hashing/7.0.0": {
+        "runtime": {
+          "lib/net7.0/System.IO.Hashing.dll": {
+            "assemblyVersion": "7.0.0.0",
+            "fileVersion": "7.0.22.51805"
+          }
+        }
+      },
+      "System.Runtime.Caching/10.0.0": {
+        "dependencies": {
+          "System.Configuration.ConfigurationManager": "10.0.0"
+        },
+        "runtime": {
+          "lib/net10.0/System.Runtime.Caching.dll": {
+            "assemblyVersion": "10.0.0.0",
+            "fileVersion": "10.0.25.52411"
+          }
+        },
+        "runtimeTargets": {
+          "runtimes/win/lib/net10.0/System.Runtime.Caching.dll": {
+            "rid": "win",
+            "assetType": "runtime",
+            "assemblyVersion": "10.0.0.0",
+            "fileVersion": "10.0.25.52411"
+          }
+        }
+      },
+      "System.Security.Cryptography.ProtectedData/10.0.0": {
+        "runtime": {
+          "lib/net10.0/System.Security.Cryptography.ProtectedData.dll": {
+            "assemblyVersion": "10.0.0.0",
+            "fileVersion": "10.0.25.52411"
+          }
+        }
+      },
+      "Yarp.ReverseProxy/2.0.1": {
+        "dependencies": {
+          "System.IO.Hashing": "7.0.0"
+        },
+        "runtime": {
+          "lib/net7.0/Yarp.ReverseProxy.dll": {
+            "assemblyVersion": "2.0.1.0",
+            "fileVersion": "2.0.123.32202"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "AdminCore/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Microsoft.AspNetCore.SystemWebAdapters/2.3.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-9JkEduqvXuNE+vqsh16LrTIvZAa90tCFxSrWUWFr5PIrMmbMpTRcSNCClCTFVXOpzAdkCDYBXGKQ2AuPV44fPQ==",
+      "path": "microsoft.aspnetcore.systemwebadapters/2.3.0",
+      "hashPath": "microsoft.aspnetcore.systemwebadapters.2.3.0.nupkg.sha512"
+    },
+    "Microsoft.AspNetCore.SystemWebAdapters.Abstractions/2.3.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-aSqL6kzo+A65Yyu7b9+Eyqub+b0Wc+uCQ9mz9XPcaoG0wXpFTon59HIMkXk8GTtcKFLfHh912VabkOpUyPF79w==",
+      "path": "microsoft.aspnetcore.systemwebadapters.abstractions/2.3.0",
+      "hashPath": "microsoft.aspnetcore.systemwebadapters.abstractions.2.3.0.nupkg.sha512"
+    },
+    "Microsoft.AspNetCore.SystemWebAdapters.CoreServices/2.3.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-WINOW57h0VEh1SoWv1Hx0Gdy/9NT1r3wvaI4ZDrUsJARK40/mZA+oTSFI/CNdye9rZkcTJ1sOKC6ogWWXFcImw==",
+      "path": "microsoft.aspnetcore.systemwebadapters.coreservices/2.3.0",
+      "hashPath": "microsoft.aspnetcore.systemwebadapters.coreservices.2.3.0.nupkg.sha512"
+    },
+    "System.Configuration.ConfigurationManager/10.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-0B+BzJ6pPMrRzJrVsttKf9MfDj6Syw9xoY+agcS9VssYQali1446+jTf5v1K94AMFUBxLXqDZlaTjO5edaI3jA==",
+      "path": "system.configuration.configurationmanager/10.0.0",
+      "hashPath": "system.configuration.configurationmanager.10.0.0.nupkg.sha512"
+    },
+    "System.IO.Hashing/7.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-sDnWM0N3AMCa86LrKTWeF3BZLD2sgWyYUc7HL6z4+xyDZNQRwzmxbo4qP2rX2MqC+Sy1/gOSRDah5ltxY5jPxw==",
+      "path": "system.io.hashing/7.0.0",
+      "hashPath": "system.io.hashing.7.0.0.nupkg.sha512"
+    },
+    "System.Runtime.Caching/10.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-NPh8KaTPj0LyiqPJZCEI9HoFFn9qes/iOfqqnEiKsmkuLwRJIaTdkVlYeNYJWqkuYonExKiM5nlfBk2/N3/TJw==",
+      "path": "system.runtime.caching/10.0.0",
+      "hashPath": "system.runtime.caching.10.0.0.nupkg.sha512"
+    },
+    "System.Security.Cryptography.ProtectedData/10.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-qy6C3gQRTrfhFfuiIYU1jNwWfFdJpBVo1BARW7jgMm1zTEm3LRzLLyOLJGaAuKE+nZCGkEP71y4rj9NWjqLGdQ==",
+      "path": "system.security.cryptography.protecteddata/10.0.0",
+      "hashPath": "system.security.cryptography.protecteddata.10.0.0.nupkg.sha512"
+    },
+    "Yarp.ReverseProxy/2.0.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-op7vBwONPFeR1PYxeLw+RLqSodODDX8RWd0OinLGMVIq6yi1q9mv1j56ImuyZgiAToksiC0Dc7jbRUZ9I+jvFA==",
+      "path": "yarp.reverseproxy/2.0.1",
+      "hashPath": "yarp.reverseproxy.2.0.1.nupkg.sha512"
+    }
+  }
+}
