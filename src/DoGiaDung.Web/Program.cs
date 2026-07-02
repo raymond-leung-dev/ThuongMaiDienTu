@@ -10,6 +10,7 @@ builder.Services.AddApplication();
 builder.Services.AddInfrastructure(builder.Configuration);
 
 builder.Services.AddControllersWithViews();
+builder.Services.AddHttpContextAccessor();
 
 // ---- Cookie Auth ----
 builder.Services.AddAuthentication(Microsoft.AspNetCore.Authentication.Cookies
