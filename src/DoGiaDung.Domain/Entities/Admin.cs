@@ -3,7 +3,7 @@ using DoGiaDung.Domain.Interfaces;
 
 namespace DoGiaDung.Domain.Entities;
 
-public class Admin : ISoftDeletable
+public class Admin : ISoftDeletable, IAuditable
 {
     [Key]
     public int AdminId { get; set; }
@@ -16,6 +16,11 @@ public class Admin : ISoftDeletable
 
     [MaxLength(1)]
     public string DelYn { get; set; } = "N";
+
+    [MaxLength(50)] public string? CreatedBy { get; set; }
+    public DateTime CreatedDt { get; set; } = DateTime.UtcNow;
+    [MaxLength(50)] public string? UpdatedBy { get; set; }
+    public DateTime? UpdatedDt { get; set; }
 
     public virtual ICollection<News> News { get; set; } = new List<News>();
 }

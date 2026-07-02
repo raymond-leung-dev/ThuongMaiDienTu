@@ -1,48 +1,153 @@
 <!DOCTYPE html>
 <html lang="@(Context.Request.Cookies["lang"]?.ToLower() ?? "es")">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Admin — @ViewData["Title"]</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>DoGiaDung Admin — @ViewData["Title"]</title>
+
+    <link href="~/admin-assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    <link href="~/admin-assets/css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="~/admin-assets/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+
+    <script src="~/admin-assets/vendor/jquery/jquery.min.js"></script>
+    <script src="~/admin-assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="~/admin-assets/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="~/admin-assets/js/sb-admin-2.min.js"></script>
+    <script src="~/admin-assets/vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/admin-assets/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+    <script src="~/admin-assets/js/demo/datatables-demo.js"></script>
 </head>
-<body>
-    <nav class="navbar navbar-dark bg-dark">
-        <div class="container-fluid">
-            <a class="navbar-brand" asp-area="Admin" asp-controller="Home" asp-action="Index">DoGiaDung Admin</a>
-            <div class="d-flex align-items-center gap-3">
-                <partial name="../../Views/Shared/_LanguageSwitcher.cshtml" />
-                <span class="text-light">@User.Identity?.Name</span>
+<body id="page-top">
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+        <ul class="navbar-nav bg-gradient-danger sidebar sidebar-dark accordion" id="accordionSidebar">
+            <li>
+                <a class="sidebar-brand d-flex align-items-center justify-content-center" asp-area="Admin" asp-controller="Home" asp-action="Index">
+                    <div class="sidebar-brand-icon rotate-n-15"><i class="fas fa-home"></i></div>
+                    <div class="sidebar-brand-text mx-3">DoGiaDung <sup>Admin</sup></div>
+                </a>
+            </li>
+            <hr class="sidebar-divider my-0" />
+
+            <!-- Products & Orders -->
+            <li class="sidebar-heading">@Lang.Get("NAV_ADM_PRODUCTS")</li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseProducts"
+                   aria-expanded="true" aria-controls="collapseProducts">
+                    <i class="fas fa-fw fa-shopping-cart"></i>
+                    <span>@Lang.Get("NAV_ADM_PRODUCTS")</span>
+                </a>
+                <div id="collapseProducts" class="collapse" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" asp-area="Admin" asp-controller="Product" asp-action="Index">@Lang.Get("NAV_ADM_PRODUCTS")</a>
+                        <a class="collapse-item" asp-area="Admin" asp-controller="Product" asp-action="Create">@Lang.Get("BTN_NEW_PRODUCT")</a>
+                        <h6 class="collapse-header">@Lang.Get("NAV_ADM_CATALOGS")</h6>
+                        <a class="collapse-item" asp-area="Admin" asp-controller="Catalog" asp-action="Index">@Lang.Get("NAV_ADM_CATALOGS")</a>
+                        <a class="collapse-item" asp-area="Admin" asp-controller="Catalog" asp-action="Create">@Lang.Get("BTN_NEW_PRODUCT")</a>
+                        <h6 class="collapse-header">@Lang.Get("NAV_ADM_ORDERS")</h6>
+                        <a class="collapse-item" asp-area="Admin" asp-controller="Transaction" asp-action="Index">@Lang.Get("NAV_ADM_ORDERS")</a>
+                    </div>
+                </div>
+            </li>
+            <hr class="sidebar-divider" />
+
+            <!-- Users + Feedback + News -->
+            <li class="sidebar-heading">@Lang.Get("NAV_ADM_USERS")</li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUsers"
+                   aria-expanded="true" aria-controls="collapseUsers">
+                    <i class="fas fa-fw fa-user"></i>
+                    <span>@Lang.Get("NAV_ADM_USERS")</span>
+                </a>
+                <div id="collapseUsers" class="collapse" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">@Lang.Get("NAV_ADM_USERS")</h6>
+                        <a class="collapse-item" asp-area="Admin" asp-controller="User" asp-action="Index">@Lang.Get("NAV_ADM_USERS")</a>
+                        <h6 class="collapse-header">@Lang.Get("NAV_ADM_FEEDBACK")</h6>
+                        <a class="collapse-item" asp-area="Admin" asp-controller="Feedback" asp-action="Index">@Lang.Get("NAV_ADM_FEEDBACK")</a>
+                        <h6 class="collapse-header">@Lang.Get("NAV_ADM_NEWS")</h6>
+                        <a class="collapse-item" asp-area="Admin" asp-controller="News" asp-action="Index">@Lang.Get("NAV_ADM_NEWS")</a>
+                        <a class="collapse-item" asp-area="Admin" asp-controller="News" asp-action="Create">Nueva</a>
+                    </div>
+                </div>
+            </li>
+            <hr class="sidebar-divider" />
+
+            <!-- Tags + Slides -->
+            <li class="sidebar-heading">@Lang.Get("NAV_ADM_TAGS")</li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTags"
+                   aria-expanded="true" aria-controls="collapseTags">
+                    <i class="fas fa-fw fa-tag"></i>
+                    <span>@Lang.Get("NAV_ADM_TAGS"), @Lang.Get("NAV_ADM_SLIDES")</span>
+                </a>
+                <div id="collapseTags" class="collapse" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">@Lang.Get("NAV_ADM_TAGS")</h6>
+                        <a class="collapse-item" asp-area="Admin" asp-controller="Tag" asp-action="Index">@Lang.Get("NAV_ADM_TAGS")</a>
+                        <h6 class="collapse-header">@Lang.Get("NAV_ADM_SLIDES")</h6>
+                        <a class="collapse-item" asp-area="Admin" asp-controller="Slide" asp-action="Index">@Lang.Get("NAV_ADM_SLIDES")</a>
+                    </div>
+                </div>
+            </li>
+
+            <li class="text-center d-none d-md-inline">
+                <button class="rounded-circle border-0" id="sidebarToggle"></button>
+            </li>
+        </ul>
+        <!-- End of Sidebar -->
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+            <div id="content">
+
+                <!-- Topbar -->
+                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+                    <form class="form-inline">
+                        <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                    </form>
+
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item dropdown no-arrow">
+                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">@User.Identity?.Name</span>
+                                <img class="img-profile rounded-circle" src="~/admin-assets/img/undraw_profile.svg">
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+                                <partial name="_LanguageSwitcher" />
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" asp-controller="User" asp-action="Logout">
+                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    @Lang.Get("NAV_LOGOUT")
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
+                </nav>
+                <!-- End of Topbar -->
+
+                @RenderBody()
+
+                <footer class="sticky-footer bg-white">
+                    <div class="container my-auto">
+                        <div class="copyright text-center my-auto">
+                            <span>@Lang.Get("FT_COPYRIGHT")</span>
+                        </div>
+                    </div>
+                </footer>
             </div>
         </div>
-    </nav>
-
-    <div class="container-fluid">
-        <div class="row">
-            <nav class="col-md-2 d-none d-md-block bg-light sidebar py-3">
-                <ul class="nav flex-column">
-                    <li class="nav-item"><a class="nav-link" asp-area="Admin" asp-controller="Home" asp-action="Index">@Lang.Get("NAV_DASHBOARD")</a></li>
-                    <li class="nav-item"><a class="nav-link" asp-area="Admin" asp-controller="Product" asp-action="Index">@Lang.Get("NAV_ADM_PRODUCTS")</a></li>
-                    <li class="nav-item"><a class="nav-link" asp-area="Admin" asp-controller="Catalog" asp-action="Index">@Lang.Get("NAV_ADM_CATALOGS")</a></li>
-                    <li class="nav-item"><a class="nav-link" asp-area="Admin" asp-controller="News" asp-action="Index">@Lang.Get("NAV_ADM_NEWS")</a></li>
-                    <li class="nav-item"><a class="nav-link" asp-area="Admin" asp-controller="Slide" asp-action="Index">@Lang.Get("NAV_ADM_SLIDES")</a></li>
-                    <li class="nav-item"><a class="nav-link" asp-area="Admin" asp-controller="Tag" asp-action="Index">@Lang.Get("NAV_ADM_TAGS")</a></li>
-                    <li class="nav-item"><a class="nav-link" asp-area="Admin" asp-controller="Transaction" asp-action="Index">@Lang.Get("NAV_ADM_ORDERS")</a></li>
-                    <li class="nav-item"><a class="nav-link" asp-area="Admin" asp-controller="User" asp-action="Index">@Lang.Get("NAV_ADM_USERS")</a></li>
-                    <li class="nav-item"><a class="nav-link" asp-area="Admin" asp-controller="Feedback" asp-action="Index">@Lang.Get("NAV_ADM_FEEDBACK")</a></li>
-                    <li class="nav-item"><hr /></li>
-                    <li class="nav-item"><a class="nav-link" asp-controller="Home" asp-action="Index" target="_blank">@Lang.Get("NAV_VIEW_SITE")</a></li>
-                    <li class="nav-item"><a class="nav-link" asp-controller="User" asp-action="Logout">@Lang.Get("NAV_LOGOUT")</a></li>
-                </ul>
-            </nav>
-            <main class="col-md-10 ms-sm-auto px-4 py-3">
-                @RenderBody()
-            </main>
-        </div>
+        <!-- End of Content Wrapper -->
     </div>
+    <!-- End of Page Wrapper -->
 
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <a class="scroll-to-top rounded" href="#page-top"><i class="fas fa-angle-up"></i></a>
 </body>
+@await RenderSectionAsync("Scripts", required: false)
 </html>

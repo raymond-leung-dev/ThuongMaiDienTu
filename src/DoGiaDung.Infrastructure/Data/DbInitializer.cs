@@ -1,4 +1,5 @@
 using DoGiaDung.Domain.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace DoGiaDung.Infrastructure.Data;
 
@@ -9,7 +10,10 @@ public static class DbInitializer
 {
     public static async Task SeedAsync(AppDbContext db)
     {
-        if (db.SysDictionaries.Any()) return; // đã seed rồi
+        if (db.SysDictionaries.Any()) return;
+        // SYS_DICTIONARY table was created by SQL migration without EF identity column tracking.
+        // Reset the identity seed counter to avoid PK collisions on re-insert.
+        await db.Database.ExecuteSqlRawAsync("DBCC CHECKIDENT ('SYS_DICTIONARY', RESEED, 0)");
 
         var seeds = new List<SysDictionary>
         {

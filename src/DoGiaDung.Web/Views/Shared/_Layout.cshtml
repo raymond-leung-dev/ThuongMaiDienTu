@@ -1,61 +1,238 @@
 <!DOCTYPE html>
 <html lang="@(Context.Request.Cookies["lang"]?.ToLower() ?? "es")">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] — DoGiaDung</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>DoGiaDung @ViewData["Title"]</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="~/user-assets/css/bootstrap.css" rel="stylesheet">
+    <link href="~/user-assets/css/jquery.smartmenus.bootstrap.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="~/user-assets/css/jquery.simpleLens.css">
+    <link rel="stylesheet" type="text/css" href="~/user-assets/css/slick.css">
+    <link rel="stylesheet" type="text/css" href="~/user-assets/css/nouislider.css">
+    <link id="switcher" href="~/user-assets/css/theme-color/default-theme.css" rel="stylesheet">
+    <link href="~/user-assets/css/sequence-theme.modern-slide-in.css" rel="stylesheet" media="all">
+    <link href="~/user-assets/css/style.css" rel="stylesheet">
+    <link href="~/user-assets/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/user-assets/css/responsive.css" rel="stylesheet" />
+
+    <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/css?family=Poppins:400,700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <!-- SCROLL TOP BUTTON -->
+    <a class="scrollToTop" href="#"><i class="fa fa-chevron-up"></i></a>
+
+    <!-- Header -->
+    <header id="aa-header">
+        <!-- Header top -->
+        <div class="aa-header-top">
             <div class="container">
-                <a class="navbar-brand" asp-controller="Home" asp-action="Index">DoGiaDung</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navmenu">
-                    <ul class="navbar-nav me-auto">
-                        <li class="nav-item"><a class="nav-link" asp-controller="Home" asp-action="Index">@Lang.Get("NAV_HOME")</a></li>
-                        <li class="nav-item"><a class="nav-link" asp-controller="Product" asp-action="Index">@Lang.Get("NAV_PRODUCT")</a></li>
-                        <li class="nav-item"><a class="nav-link" asp-controller="Home" asp-action="About">@Lang.Get("NAV_ABOUT")</a></li>
-                        <li class="nav-item"><a class="nav-link" asp-controller="Home" asp-action="Contact">@Lang.Get("NAV_CONTACT")</a></li>
-                    </ul>
-                    <ul class="navbar-nav me-2">
-                        <li class="nav-item"><a class="nav-link" asp-controller="Cart" asp-action="Index">🛒 @Lang.Get("NAV_CART")</a></li>
-                    </ul>
-                    <partial name="_LanguageSwitcher" />
-                    <ul class="navbar-nav ms-2">
-                        @if (User.Identity?.IsAuthenticated == true)
-                        {
-                            <li class="nav-item"><span class="nav-link text-light">@User.Identity.Name</span></li>
-                            <li class="nav-item"><a class="nav-link" asp-controller="User" asp-action="Logout">@Lang.Get("NAV_LOGOUT")</a></li>
-                        }
-                        else
-                        {
-                            <li class="nav-item"><a class="nav-link" asp-controller="User" asp-action="Index">@Lang.Get("NAV_LOGIN")</a></li>
-                            <li class="nav-item"><a class="nav-link" asp-controller="User" asp-action="Register">@Lang.Get("NAV_REGISTER")</a></li>
-                        }
-                    </ul>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="aa-header-top-area">
+                            <div class="aa-header-top-left">
+                                <div class="cellphone hidden-xs">
+                                    <p><span class="fa fa-phone"></span>+34 600 000 000</p>
+                                </div>
+                                <div style="display:inline-block;margin-left:15px">
+                                    <partial name="_LanguageSwitcher" />
+                                </div>
+                            </div>
+                            <div class="aa-header-top-right">
+                                <ul class="aa-head-top-nav-right">
+                                    <li class="hidden-xs"><a asp-controller="Cart" asp-action="Index">@Lang.Get("NAV_CART")</a></li>
+                                    @if (User.Identity?.IsAuthenticated == true)
+                                    {
+                                        <li class="hidden-xs"><a asp-controller="User" asp-action="History">@Lang.Get("TBL_ORDER_STATUS")</a></li>
+                                        <li class="hidden-xs"><a asp-controller="User" asp-action="ThongTin">@Lang.Get("TTL_LOGIN")</a></li>
+                                        <li class="hidden-xs"><a asp-controller="User" asp-action="Logout">@Lang.Get("NAV_LOGOUT")</a></li>
+                                    }
+                                    else
+                                    {
+                                        <li class="hidden-xs"><a asp-controller="User" asp-action="Register">@Lang.Get("NAV_REGISTER")</a></li>
+                                        <li><a href="" data-toggle="modal" data-target="#login-modal">@Lang.Get("NAV_LOGIN")</a></li>
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </nav>
+        </div>
+        <!-- Header bottom -->
+        <div class="aa-header-bottom">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="aa-header-bottom-area">
+                            <div class="aa-logo">
+                                <a asp-controller="Home" asp-action="Index">
+                                    <p><strong>DoGiaDung</strong> <span>@Lang.Get("MSG_WELCOME")</span></p>
+                                </a>
+                            </div>
+                            <!-- Cart box -->
+                            <div class="aa-cartbox">
+                                <a class="aa-cart-link" asp-controller="Cart" asp-action="Index">
+                                    <span class="fa fa-shopping-basket"></span>
+                                    <span class="aa-cart-title">@Lang.Get("NAV_CART")</span>
+                                    <span class="aa-cart-notify">0</span>
+                                </a>
+                            </div>
+                            <!-- Search box -->
+                            <div class="aa-search-box">
+                                <form asp-controller="Product" asp-action="Index" method="get">
+                                    <input type="text" name="search" placeholder="@Lang.GetRaw("PLH_SEARCH_PRODUCT")">
+                                    <button type="submit"><span class="fa fa-search"></span></button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </header>
+    <!-- / header -->
 
-    <main class="container mt-4">
-        @RenderBody()
-    </main>
+    <!-- Menu -->
+    <section id="menu">
+        <div class="container">
+            <div class="menu-area">
+                <div class="navbar navbar-default" role="navigation">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                    </div>
+                    <div class="navbar-collapse collapse">
+                        <ul class="nav navbar-nav">
+                            <li><a asp-controller="Home" asp-action="Index">@Lang.Get("NAV_HOME")</a></li>
+                            <li><a asp-controller="Product" asp-action="Index">@Lang.Get("NAV_PRODUCT")</a></li>
+                            <li><a asp-controller="Home" asp-action="Contact">@Lang.Get("NAV_CONTACT")</a></li>
+                            <li><a asp-controller="TinTuc" asp-action="Index">@Lang.Get("NAV_NEWS")</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- / menu -->
 
-    <footer class="border-top footer text-muted mt-5 py-3">
-        <div class="container text-center">
-            @Lang.Get("FT_COPYRIGHT")
+    @RenderBody()
+
+    <!-- Footer -->
+    <footer id="aa-footer">
+        <div class="aa-footer-top">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="aa-footer-top-area">
+                            <div class="row">
+                                <div class="col-md-3 col-sm-6">
+                                    <div class="aa-footer-widget">
+                                        <h3>@Lang.Get("FT_COPYRIGHT")</h3>
+                                        <ul class="aa-footer-nav">
+                                            <li><a href="#">@Lang.Get("NAV_CONTACT")</a></li>
+                                            <li><a href="#">FAQ</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-sm-6">
+                                    <div class="aa-footer-widget">
+                                        <h3>@Lang.Get("LBL_PAYMENT")</h3>
+                                        <p><i class="fa fa-credit-card-alt"></i> Stripe</p>
+                                        <p><i class="fa fa-paypal"></i> PayPal</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-sm-6">
+                                    <div class="aa-footer-widget">
+                                        <h3>@Lang.Get("TTL_ABOUT")</h3>
+                                        <p>@Lang.Get("MSG_ABOUT_US")</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-sm-6">
+                                    <div class="aa-footer-widget">
+                                        <h3>@Lang.Get("NAV_CONTACT")</h3>
+                                        <address>
+                                            <p><span class="fa fa-phone"></span>+34 600 000 000</p>
+                                            <p><span class="fa fa-envelope"></span>info@dogiadung.es</p>
+                                        </address>
+                                        <div class="aa-footer-social">
+                                            <a href="#"><span class="fa fa-facebook"></span></a>
+                                            <a href="#"><span class="fa fa-twitter"></span></a>
+                                            <a href="#"><span class="fa fa-instagram"></span></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="aa-footer-bottom">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="aa-footer-bottom-area">
+                            <p>@Lang.Get("FT_COPYRIGHT")</p>
+                            <div class="aa-footer-payment">
+                                <span class="fa fa-cc-mastercard"></span>
+                                <span class="fa fa-cc-visa"></span>
+                                <span class="fa fa-paypal"></span>
+                                <span class="fa fa-cc-discover"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </footer>
+    <!-- / footer -->
 
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
+    <!-- Login Modal -->
+    <div class="modal fade" id="login-modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4>@Lang.Get("NAV_LOGIN")</h4>
+                    <form asp-controller="User" asp-action="Login" method="post" class="aa-login-form">
+                        <label for="">@Lang.Get("LBL_EMAIL")<span>*</span></label>
+                        <input type="text" name="Email" placeholder="@Lang.GetRaw("LBL_EMAIL")">
+                        <label for="">@Lang.Get("LBL_PASSWORD")<span>*</span></label>
+                        <input type="password" name="Password" placeholder="@Lang.GetRaw("LBL_PASSWORD")">
+                        <button class="aa-browse-btn" type="submit">@Lang.Get("BTN_LOGIN")</button>
+                        <label for="rememberme" class="rememberme"><input type="checkbox"> Remember me</label>
+                        <p class="aa-lost-password"><a asp-controller="User" asp-action="ForgotPassword">@Lang.Get("BTN_FORGOT_PASS")</a></p>
+                        <div class="aa-register-now">
+                            @Lang.Get("MSG_REGISTER_ERR") <a asp-controller="User" asp-action="Register">@Lang.Get("NAV_REGISTER")</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="~/user-assets/js/bootstrap.js"></script>
+    <script type="text/javascript" src="~/user-assets/js/jquery.smartmenus.js"></script>
+    <script type="text/javascript" src="~/user-assets/js/jquery.smartmenus.bootstrap.js"></script>
+    <script src="~/user-assets/js/sequence.js"></script>
+    <script src="~/user-assets/js/sequence-theme.modern-slide-in.js"></script>
+    <script type="text/javascript" src="~/user-assets/js/jquery.simpleGallery.js"></script>
+    <script type="text/javascript" src="~/user-assets/js/jquery.simpleLens.js"></script>
+    <script type="text/javascript" src="~/user-assets/js/slick.js"></script>
+    <script type="text/javascript" src="~/user-assets/js/nouislider.js"></script>
+    <script src="~/user-assets/js/custom.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
