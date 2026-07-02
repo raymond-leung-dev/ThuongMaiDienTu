@@ -3,6 +3,9 @@
 
 **/packages/
 
+**/bin/
+**/obj/
+
 **/.claude
 **/.codegraph
 **/.cursor
@@ -10,3 +13,6 @@
 .mcp.json
 AGENTS.md
 CLAUDE.md
+
+# Node / npm
+**/node_modules/

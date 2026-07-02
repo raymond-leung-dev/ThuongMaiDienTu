@@ -1,0 +1,12 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/DoGiaDung.Application/DoGiaDung.Application.csproj" />
+    <Project Path="src/DoGiaDung.Domain/DoGiaDung.Domain.csproj" />
+    <Project Path="src/DoGiaDung.Infrastructure/DoGiaDung.Infrastructure.csproj" />
+    <Project Path="src/DoGiaDung.Web/DoGiaDung.Web.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/DoGiaDung.IntegrationTests/DoGiaDung.IntegrationTests.csproj" />
+    <Project Path="tests/DoGiaDung.UnitTests/DoGiaDung.UnitTests.csproj" />
+  </Folder>
+</Solution>
