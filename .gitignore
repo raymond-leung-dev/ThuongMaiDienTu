@@ -16,3 +16,6 @@ CLAUDE.md
 
 # Node / npm
 **/node_modules/
+
+# SCSS sources in wwwroot
+**/wwwroot/**/*.scss

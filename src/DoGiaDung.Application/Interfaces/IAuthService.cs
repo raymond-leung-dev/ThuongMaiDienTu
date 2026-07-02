@@ -10,4 +10,5 @@ public interface IAuthService
     Task<Result> ForgotPasswordAsync(string email);
     Task<Result> ResetPasswordAsync(ResetPasswordDto dto);
     Task LogoutAsync();
+    Task<Result<LoginResponseDto>> AdminLoginAsync(string username, string password);
 }

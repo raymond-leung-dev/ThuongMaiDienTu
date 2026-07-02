@@ -13,11 +13,13 @@ namespace DoGiaDung.Infrastructure.Services;
 public class AuthService : IAuthService
 {
     private readonly IRepository<User> _userRepo;
+    private readonly IRepository<Admin> _adminRepo;
     private readonly IHttpContextAccessor _httpContextAccessor;
 
-    public AuthService(IRepository<User> userRepo, IHttpContextAccessor httpContextAccessor)
+    public AuthService(IRepository<User> userRepo, IRepository<Admin> adminRepo, IHttpContextAccessor httpContextAccessor)
     {
         _userRepo = userRepo;
+        _adminRepo = adminRepo;
         _httpContextAccessor = httpContextAccessor;
     }
 
@@ -105,8 +107,52 @@ public class AuthService : IAuthService
     // --- Admin Login ---
     public async Task<Result<LoginResponseDto>> AdminLoginAsync(string username, string password)
     {
-        // Admin login logic — tương tự nhưng check bảng Admin
-        // Giữ đơn giản: dùng repository riêng
-        return Result<LoginResponseDto>.Failure("Not implemented");
+        var admins = await _adminRepo.FindAsync(a => a.Username == username && a.DelYn == "N");
+        var admin = admins.FirstOrDefault();
+        if (admin == null)
+            return Result<LoginResponseDto>.Failure("Invalid credentials.", "LOGIN_FAILED");
+
+        // Check BCrypt hash first, then fallback to plaintext (legacy data)
+        bool ok;
+        try
+        {
+            ok = BCrypt.Net.BCrypt.Verify(password, admin.PasswordHash);
+        }
+        catch
+        {
+            ok = (admin.PasswordHash == password); // legacy plaintext
+        }
+
+        if (!ok)
+        {
+            // Try direct comparison for legacy plaintext passwords
+            if (admin.PasswordHash == password)
+            {
+                // Auto-upgrade to BCrypt
+                admin.PasswordHash = BCrypt.Net.BCrypt.HashPassword(password);
+                await _adminRepo.UpdateAsync(admin);
+                ok = true;
+            }
+        }
+
+        if (!ok)
+            return Result<LoginResponseDto>.Failure("Invalid credentials.", "LOGIN_FAILED");
+
+        var claims = new List<Claim>
+        {
+            new(ClaimTypes.Name, admin.Username),
+            new(ClaimTypes.NameIdentifier, admin.AdminId.ToString()),
+            new(ClaimTypes.Role, "Admin")
+        };
+
+        var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+        var principal = new ClaimsPrincipal(identity);
+
+        await _httpContextAccessor.HttpContext!.SignInAsync(
+            CookieAuthenticationDefaults.AuthenticationScheme,
+            principal,
+            new AuthenticationProperties { IsPersistent = true, ExpiresUtc = DateTimeOffset.UtcNow.AddHours(8) });
+
+        return Result<LoginResponseDto>.Success(new LoginResponseDto(true, admin.Username, null));
     }
 }

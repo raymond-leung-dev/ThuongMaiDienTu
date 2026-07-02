@@ -1,4 +1,3 @@
-using DoGiaDung.Application.DTOs;
 using DoGiaDung.Application.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -14,11 +13,14 @@ public class AdminController : Controller
     public IActionResult Index() => View();
 
     [HttpPost]
-    public async Task<IActionResult> Login(UserLoginDto dto)
+    public async Task<IActionResult> Login(string username, string password)
     {
-        var result = await _auth.LoginAsync(dto);
+        var result = await _auth.AdminLoginAsync(username, password);
         if (!result.IsSuccess)
+        {
+            ViewBag.ErrorInfo = result.Error;
             return View("Index");
+        }
         return RedirectToAction("Index", "Home", new { area = "Admin" });
     }
 
