@@ -9,4 +9,5 @@ public interface IOrderService
     Task<Result<IReadOnlyList<OrderDto>>> GetUserOrdersAsync(string userEmail, int page = 1, int pageSize = 10);
     Task<Result> CancelOrderAsync(int transactionId, string userEmail);
     Task<Result> ConfirmPaymentAsync(string stripeSessionId);
+    Task<Result<string>> CreateCheckoutAsync(string userEmail, string userName, string userPhone, string address, string? message);
 }

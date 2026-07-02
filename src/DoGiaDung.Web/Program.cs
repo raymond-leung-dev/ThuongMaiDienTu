@@ -55,7 +55,15 @@ builder.Services.AddRateLimiter(options =>
     options.RejectionStatusCode = 429;
 });
 
-// ---- Memory Cache (for DictionaryService) ----
+// ---- Session + Memory Cache ----
+builder.Services.AddDistributedMemoryCache();
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromHours(2);
+    options.Cookie.HttpOnly = true;
+    options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
+    options.Cookie.SameSite = SameSiteMode.Lax;
+});
 builder.Services.AddMemoryCache();
 
 var app = builder.Build();
@@ -73,6 +81,9 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseRateLimiter();
+
+// ---- Session ----
+app.UseSession();
 
 // ---- Localization ----
 app.UseRequestLocalization();

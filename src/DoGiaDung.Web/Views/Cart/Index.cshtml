@@ -1,0 +1,63 @@
+@model DoGiaDung.Application.DTOs.CartDto
+@{
+    ViewData["Title"] = "Carrito";
+}
+
+<h2>Carrito de compras</h2>
+
+@if (Model.IsEmpty)
+{
+    <p>Tu carrito está vacío.</p>
+    <a asp-controller="Product" asp-action="Index" class="btn btn-primary">Ver productos</a>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Producto</th>
+                <th>Precio</th>
+                <th>Cantidad</th>
+                <th>Total</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Items)
+            {
+                <tr>
+                    <td>
+                        <a asp-controller="Product" asp-action="Detail" asp-route-id="@item.ProductId">@item.ProductName</a>
+                    </td>
+                    <td>@item.PriceWithVat.ToString("C2", new System.Globalization.CultureInfo("es-ES"))</td>
+                    <td>
+                        <form asp-action="Update" method="post" class="d-flex align-items-center gap-2">
+                            <input type="hidden" name="productId" value="@item.ProductId" />
+                            <input name="quantity" type="number" value="@item.Quantity" min="1" class="form-control" style="width:70px" />
+                            <button type="submit" class="btn btn-sm btn-outline-secondary">Actualizar</button>
+                        </form>
+                    </td>
+                    <td>@item.Total.ToString("C2", new System.Globalization.CultureInfo("es-ES"))</td>
+                    <td>
+                        <form asp-action="Remove" method="post">
+                            <input type="hidden" name="productId" value="@item.ProductId" />
+                            <button type="submit" class="btn btn-sm btn-danger">Eliminar</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="3" class="text-end fw-bold">Total:</td>
+                <td class="fw-bold">@Model.Total.ToString("C2", new System.Globalization.CultureInfo("es-ES"))</td>
+                <td></td>
+            </tr>
+        </tfoot>
+    </table>
+
+    <div class="d-flex gap-2">
+        <a class="btn btn-success btn-lg" asp-controller="Checkout" asp-action="Index">Proceder al pago</a>
+        <a asp-controller="Product" asp-action="Index" class="btn btn-outline-primary">Seguir comprando</a>
+    </div>
+}

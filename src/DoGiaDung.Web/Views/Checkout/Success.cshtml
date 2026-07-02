@@ -1,0 +1,10 @@
+@{
+    ViewData["Title"] = "Pedido Confirmado";
+}
+
+<div class="text-center">
+    <h1 class="text-success">¡Pedido realizado!</h1>
+    <p>Gracias por tu compra. Tu pedido #@ViewBag.TransactionId ha sido confirmado.</p>
+    <p>Recibirás un correo electrónico con los detalles.</p>
+    <a asp-controller="Home" asp-action="Index" class="btn btn-primary">Volver a la tienda</a>
+</div>

@@ -1,0 +1,35 @@
+@model DoGiaDung.Application.DTOs.CartDto
+@{
+    ViewData["Title"] = "Pago";
+}
+
+<h2>Revisar pedido</h2>
+
+<table class="table">
+    <thead><tr><th>Producto</th><th>Cantidad</th><th>Total</th></tr></thead>
+    <tbody>
+        @foreach (var item in Model.Items)
+        {
+            <tr>
+                <td>@item.ProductName</td>
+                <td>@item.Quantity</td>
+                <td>@item.Total.ToString("C2", new System.Globalization.CultureInfo("es-ES"))</td>
+            </tr>
+        }
+    </tbody>
+    <tfoot>
+        <tr><td colspan="2" class="text-end fw-bold">Total:</td><td class="fw-bold">@Model.Total.ToString("C2", new System.Globalization.CultureInfo("es-ES"))</td></tr>
+    </tfoot>
+</table>
+
+<form method="post" asp-action="PlaceOrder">
+    <div class="mb-3">
+        <label>Dirección de envío</label>
+        <input name="address" class="form-control" required />
+    </div>
+    <div class="mb-3">
+        <label>Mensaje (opcional)</label>
+        <textarea name="message" class="form-control"></textarea>
+    </div>
+    <button type="submit" class="btn btn-success btn-lg">Pagar con Stripe</button>
+</form>

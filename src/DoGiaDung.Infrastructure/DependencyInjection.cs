@@ -28,6 +28,8 @@ public static class DependencyInjection
         // ---- Services ----
         services.AddScoped<IAuthService, AuthService>();
         services.AddScoped<IProductService, ProductService>();
+        services.AddScoped<Application.Interfaces.ICartService, CartService>();
+        services.AddScoped<IOrderService, OrderService>();
         services.AddScoped<IPaymentService, StripePaymentService>();
         services.AddScoped<IEmailService, SmtpEmailService>();
         services.AddScoped<IDictionaryService, CachedDictionaryService>();
