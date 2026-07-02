@@ -1,0 +1,23 @@
+<div class="dropdown d-inline-block">
+    <button class="btn btn-sm btn-outline-light dropdown-toggle" type="button"
+            data-bs-toggle="dropdown" aria-expanded="false">
+        @{
+            var lang = Context.Request.Cookies["lang"] ?? "ES";
+            var flag = lang switch { "ES" => "🇪🇸", "EN" => "🇬🇧", "VI" => "🇻🇳", _ => "🇪🇸" };
+            var name = lang switch { "ES" => "Español", "EN" => "English", "VI" => "Tiếng Việt", _ => "Español" };
+        }
+        @flag @name
+    </button>
+    <ul class="dropdown-menu dropdown-menu-end">
+        <li><a class="dropdown-item @(lang == "ES" ? "active" : "")" href="#" onclick="setLang('ES')">🇪🇸 Español</a></li>
+        <li><a class="dropdown-item @(lang == "EN" ? "active" : "")" href="#" onclick="setLang('EN')">🇬🇧 English</a></li>
+        <li><a class="dropdown-item @(lang == "VI" ? "active" : "")" href="#" onclick="setLang('VI')">🇻🇳 Tiếng Việt</a></li>
+    </ul>
+</div>
+
+<script>
+    function setLang(lang) {
+        document.cookie = "lang=" + lang + ";path=/;max-age=" + (365 * 86400) + ";SameSite=Lax";
+        location.reload();
+    }
+</script>

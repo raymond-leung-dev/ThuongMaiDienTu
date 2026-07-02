@@ -1,10 +1,10 @@
 @{
-    ViewData["Title"] = "Pedido Confirmado";
+    ViewData["Title"] = Lang.GetRaw("TTL_ORDER_CONFIRMED");
 }
 
 <div class="text-center">
-    <h1 class="text-success">¡Pedido realizado!</h1>
-    <p>Gracias por tu compra. Tu pedido #@ViewBag.TransactionId ha sido confirmado.</p>
-    <p>Recibirás un correo electrónico con los detalles.</p>
-    <a asp-controller="Home" asp-action="Index" class="btn btn-primary">Volver a la tienda</a>
+    <h1 class="text-success">@Lang.Get("MSG_ORDER_SUCCESS")</h1>
+    <p>@Lang.Get("MSG_ORDER_THANKS")</p>
+    <p>@Lang.Get("MSG_ORDER_EMAIL")</p>
+    <a asp-controller="Home" asp-action="Index" class="btn btn-primary">@Lang.Get("BTN_BACK_HOME")</a>
 </div>

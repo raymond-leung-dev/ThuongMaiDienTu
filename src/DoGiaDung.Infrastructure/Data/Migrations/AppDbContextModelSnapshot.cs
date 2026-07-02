@@ -3,8 +3,8 @@ using System;
 using DoGiaDung.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
@@ -18,34 +18,34 @@ namespace DoGiaDung.Infrastructure.Data.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "10.0.9")
-                .HasAnnotation("Relational:MaxIdentifierLength", 63);
+                .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
-            NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
+            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
             modelBuilder.Entity("DoGiaDung.Domain.Entities.Admin", b =>
                 {
                     b.Property<int>("AdminId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+                        .HasColumnType("int");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("AdminId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AdminId"));
 
                     b.Property<string>("DelYn")
                         .IsRequired()
                         .ValueGeneratedOnAdd()
                         .HasMaxLength(1)
-                        .HasColumnType("character varying(1)")
+                        .HasColumnType("nvarchar(1)")
                         .HasDefaultValue("N");
 
                     b.Property<string>("PasswordHash")
                         .IsRequired()
                         .HasMaxLength(500)
-                        .HasColumnType("character varying(500)");
+                        .HasColumnType("nvarchar(500)");
 
                     b.Property<string>("Username")
                         .IsRequired()
                         .HasMaxLength(50)
-                        .HasColumnType("character varying(50)");
+                        .HasColumnType("nvarchar(50)");
 
                     b.HasKey("AdminId");
 
@@ -56,35 +56,35 @@ namespace DoGiaDung.Infrastructure.Data.Migrations
                 {
                     b.Property<int>("CatalogId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+                        .HasColumnType("int");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("CatalogId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CatalogId"));
 
                     b.Property<string>("CatalogName")
                         .IsRequired()
                         .HasMaxLength(200)
-                        .HasColumnType("character varying(200)");
+                        .HasColumnType("nvarchar(200)");
 
                     b.Property<string>("CreatedBy")
                         .HasMaxLength(50)
-                        .HasColumnType("character varying(50)");
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<DateTime>("CreatedDt")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("DelYn")
                         .IsRequired()
                         .ValueGeneratedOnAdd()
                         .HasMaxLength(1)
-                        .HasColumnType("character varying(1)")
+                        .HasColumnType("nvarchar(1)")
                         .HasDefaultValue("N");
 
                     b.Property<string>("UpdatedBy")
                         .HasMaxLength(50)
-                        .HasColumnType("character varying(50)");
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<DateTime?>("UpdatedDt")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("datetime2");
 
                     b.HasKey("CatalogId");
 
@@ -95,23 +95,23 @@ namespace DoGiaDung.Infrastructure.Data.Migrations
                 {
                     b.Property<int>("FeedbackId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+                        .HasColumnType("int");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("FeedbackId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("FeedbackId"));
 
                     b.Property<string>("DelYn")
                         .IsRequired()
                         .ValueGeneratedOnAdd()
                         .HasMaxLength(1)
-                        .HasColumnType("character varying(1)")
+                        .HasColumnType("nvarchar(1)")
                         .HasDefaultValue("N");
 
                     b.Property<string>("Message")
                         .HasMaxLength(500)
-                        .HasColumnType("character varying(500)");
+                        .HasColumnType("nvarchar(500)");
 
                     b.Property<int?>("UserId")
-                        .HasColumnType("integer");
+                        .HasColumnType("int");
 
                     b.HasKey("FeedbackId");
 
@@ -124,48 +124,48 @@ namespace DoGiaDung.Infrastructure.Data.Migrations
                 {
                     b.Property<int>("NewsId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+                        .HasColumnType("int");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("NewsId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("NewsId"));
 
                     b.Property<int?>("AdminId")
-                        .HasColumnType("integer");
+                        .HasColumnType("int");
 
                     b.Property<string>("Content")
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("CreatedBy")
                         .HasMaxLength(50)
-                        .HasColumnType("character varying(50)");
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("datetime2");
 
                     b.Property<DateTime>("CreatedDt")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("DelYn")
                         .IsRequired()
                         .ValueGeneratedOnAdd()
                         .HasMaxLength(1)
-                        .HasColumnType("character varying(1)")
+                        .HasColumnType("nvarchar(1)")
                         .HasDefaultValue("N");
 
                     b.Property<string>("ImageLink")
                         .HasMaxLength(1000)
-                        .HasColumnType("character varying(1000)");
+                        .HasColumnType("nvarchar(1000)");
 
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasMaxLength(200)
-                        .HasColumnType("character varying(200)");
+                        .HasColumnType("nvarchar(200)");
 
                     b.Property<string>("UpdatedBy")
                         .HasMaxLength(50)
-                        .HasColumnType("character varying(50)");
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<DateTime?>("UpdatedDt")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("datetime2");
 
                     b.HasKey("NewsId");
 
@@ -178,9 +178,9 @@ namespace DoGiaDung.Infrastructure.Data.Migrations
                 {
                     b.Property<int>("OrderId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+                        .HasColumnType("int");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("OrderId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("OrderId"));
 
                     b.Property<decimal>("Amount")
                         .HasColumnType("decimal(18,2)");
@@ -189,20 +189,20 @@ namespace DoGiaDung.Infrastructure.Data.Migrations
                         .IsRequired()
                         .ValueGeneratedOnAdd()
                         .HasMaxLength(1)
-                        .HasColumnType("character varying(1)")
+                        .HasColumnType("nvarchar(1)")
                         .HasDefaultValue("N");
 
                     b.Property<int>("OrderStatus")
-                        .HasColumnType("integer");
+                        .HasColumnType("int");
 
                     b.Property<int>("ProductId")
-                        .HasColumnType("integer");
+                        .HasColumnType("int");
 
                     b.Property<int>("Quantity")
-                        .HasColumnType("integer");
+                        .HasColumnType("int");
 
                     b.Property<int>("TransactionId")
-                        .HasColumnType("integer");
+                        .HasColumnType("int");
 
                     b.HasKey("OrderId");
 
@@ -217,33 +217,33 @@ namespace DoGiaDung.Infrastructure.Data.Migrations
                 {
                     b.Property<int>("ProductId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+                        .HasColumnType("int");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("ProductId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ProductId"));
 
                     b.Property<int?>("CatalogId")
-                        .HasColumnType("integer");
+                        .HasColumnType("int");
 
                     b.Property<string>("CreatedBy")
                         .HasMaxLength(50)
-                        .HasColumnType("character varying(50)");
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<DateTime>("CreatedDt")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("DelYn")
                         .IsRequired()
                         .ValueGeneratedOnAdd()
                         .HasMaxLength(1)
-                        .HasColumnType("character varying(1)")
+                        .HasColumnType("nvarchar(1)")
                         .HasDefaultValue("N");
 
                     b.Property<string>("Description")
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ImageLink")
                         .HasMaxLength(1000)
-                        .HasColumnType("character varying(1000)");
+                        .HasColumnType("nvarchar(1000)");
 
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
@@ -251,26 +251,28 @@ namespace DoGiaDung.Infrastructure.Data.Migrations
                     b.Property<string>("ProductName")
                         .IsRequired()
                         .HasMaxLength(200)
-                        .HasColumnType("character varying(200)");
+                        .HasColumnType("nvarchar(200)");
 
                     b.Property<int?>("ProductStatus")
-                        .HasColumnType("integer");
+                        .HasColumnType("int");
 
                     b.Property<int?>("Quantity")
-                        .HasColumnType("integer");
+                        .HasColumnType("int");
 
                     b.Property<int?>("TagId")
-                        .HasColumnType("integer");
+                        .HasColumnType("int");
 
                     b.Property<string>("UpdatedBy")
                         .HasMaxLength(50)
-                        .HasColumnType("character varying(50)");
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<DateTime?>("UpdatedDt")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("datetime2");
 
                     b.Property<decimal>("VatRate")
-                        .HasColumnType("decimal(18,4)).HasDefaultValue(VatRates.General");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("decimal(18,4)")
+                        .HasDefaultValue(0.21m);
 
                     b.HasKey("ProductId");
 
@@ -285,27 +287,27 @@ namespace DoGiaDung.Infrastructure.Data.Migrations
                 {
                     b.Property<int>("SlideId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+                        .HasColumnType("int");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("SlideId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SlideId"));
 
                     b.Property<string>("DelYn")
                         .IsRequired()
                         .ValueGeneratedOnAdd()
                         .HasMaxLength(1)
-                        .HasColumnType("character varying(1)")
+                        .HasColumnType("nvarchar(1)")
                         .HasDefaultValue("N");
 
                     b.Property<string>("ImageLink")
                         .HasMaxLength(1000)
-                        .HasColumnType("character varying(1000)");
+                        .HasColumnType("nvarchar(1000)");
 
                     b.Property<int?>("SortOrder")
-                        .HasColumnType("integer");
+                        .HasColumnType("int");
 
                     b.Property<string>("Title")
                         .HasMaxLength(200)
-                        .HasColumnType("character varying(200)");
+                        .HasColumnType("nvarchar(200)");
 
                     b.HasKey("SlideId");
 
@@ -316,78 +318,78 @@ namespace DoGiaDung.Infrastructure.Data.Migrations
                 {
                     b.Property<int>("DicId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+                        .HasColumnType("int");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("DicId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("DicId"));
 
                     b.Property<string>("ClsDt")
                         .HasMaxLength(14)
-                        .HasColumnType("character varying(14)");
+                        .HasColumnType("nvarchar(14)");
 
                     b.Property<string>("CnfmDt")
                         .HasMaxLength(14)
-                        .HasColumnType("character varying(14)");
+                        .HasColumnType("nvarchar(14)");
 
                     b.Property<string>("CnfmIp")
                         .HasMaxLength(50)
-                        .HasColumnType("character varying(50)");
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("CnfmSeq")
                         .HasMaxLength(50)
-                        .HasColumnType("character varying(50)");
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("CnfmUser")
                         .HasMaxLength(50)
-                        .HasColumnType("character varying(50)");
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("ColCd")
                         .IsRequired()
                         .HasMaxLength(100)
-                        .HasColumnType("character varying(100)");
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("ColCdTp")
                         .IsRequired()
                         .ValueGeneratedOnAdd()
                         .HasMaxLength(50)
-                        .HasColumnType("character varying(50)")
+                        .HasColumnType("nvarchar(50)")
                         .HasDefaultValue("0");
 
                     b.Property<string>("ColCdTpNm")
                         .IsRequired()
                         .HasMaxLength(500)
-                        .HasColumnType("character varying(500)");
+                        .HasColumnType("nvarchar(500)");
 
                     b.Property<string>("LngTp")
                         .IsRequired()
                         .HasMaxLength(10)
-                        .HasColumnType("character varying(10)");
+                        .HasColumnType("nvarchar(10)");
 
                     b.Property<string>("Note")
                         .HasMaxLength(500)
-                        .HasColumnType("character varying(500)");
+                        .HasColumnType("nvarchar(500)");
 
                     b.Property<string>("RegDt")
                         .HasMaxLength(14)
-                        .HasColumnType("character varying(14)");
+                        .HasColumnType("nvarchar(14)");
 
                     b.Property<int>("SortSeq")
-                        .HasColumnType("integer");
+                        .HasColumnType("int");
 
                     b.Property<string>("VsdTp")
                         .HasMaxLength(10)
-                        .HasColumnType("character varying(10)");
+                        .HasColumnType("nvarchar(10)");
 
                     b.Property<string>("WorkDt")
                         .HasMaxLength(14)
-                        .HasColumnType("character varying(14)");
+                        .HasColumnType("nvarchar(14)");
 
                     b.Property<string>("WorkIp")
                         .HasMaxLength(50)
-                        .HasColumnType("character varying(50)");
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("WorkMn")
                         .HasMaxLength(50)
-                        .HasColumnType("character varying(50)");
+                        .HasColumnType("nvarchar(50)");
 
                     b.HasKey("DicId");
 
@@ -401,21 +403,21 @@ namespace DoGiaDung.Infrastructure.Data.Migrations
                 {
                     b.Property<int>("TagId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+                        .HasColumnType("int");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("TagId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TagId"));
 
                     b.Property<string>("DelYn")
                         .IsRequired()
                         .ValueGeneratedOnAdd()
                         .HasMaxLength(1)
-                        .HasColumnType("character varying(1)")
+                        .HasColumnType("nvarchar(1)")
                         .HasDefaultValue("N");
 
                     b.Property<string>("TagName")
                         .IsRequired()
                         .HasMaxLength(100)
-                        .HasColumnType("character varying(100)");
+                        .HasColumnType("nvarchar(100)");
 
                     b.HasKey("TagId");
 
@@ -426,74 +428,74 @@ namespace DoGiaDung.Infrastructure.Data.Migrations
                 {
                     b.Property<int>("TransactionId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+                        .HasColumnType("int");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("TransactionId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TransactionId"));
 
                     b.Property<decimal>("Amount")
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("CreatedBy")
                         .HasMaxLength(50)
-                        .HasColumnType("character varying(50)");
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<DateTime>("CreatedDt")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("DelYn")
                         .IsRequired()
                         .ValueGeneratedOnAdd()
                         .HasMaxLength(1)
-                        .HasColumnType("character varying(1)")
+                        .HasColumnType("nvarchar(1)")
                         .HasDefaultValue("N");
 
                     b.Property<string>("Message")
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Payment")
-                        .HasColumnType("integer");
+                        .HasColumnType("int");
 
                     b.Property<string>("PaymentInfo")
                         .HasMaxLength(50)
-                        .HasColumnType("character varying(50)");
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("Security")
                         .HasMaxLength(10)
-                        .HasColumnType("character varying(10)");
+                        .HasColumnType("nvarchar(10)");
 
                     b.Property<DateTime>("TransactionCreated")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("TransactionStatus")
                         .IsRequired()
                         .HasMaxLength(20)
-                        .HasColumnType("character varying(20)");
+                        .HasColumnType("nvarchar(20)");
 
                     b.Property<string>("UpdatedBy")
                         .HasMaxLength(50)
-                        .HasColumnType("character varying(50)");
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<DateTime?>("UpdatedDt")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("UserAddress")
                         .HasMaxLength(500)
-                        .HasColumnType("character varying(500)");
+                        .HasColumnType("nvarchar(500)");
 
                     b.Property<string>("UserEmail")
                         .HasMaxLength(200)
-                        .HasColumnType("character varying(200)");
+                        .HasColumnType("nvarchar(200)");
 
                     b.Property<int>("UserId")
-                        .HasColumnType("integer");
+                        .HasColumnType("int");
 
                     b.Property<string>("UserName")
                         .HasMaxLength(100)
-                        .HasColumnType("character varying(100)");
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("UserPhone")
                         .HasMaxLength(20)
-                        .HasColumnType("character varying(20)");
+                        .HasColumnType("nvarchar(20)");
 
                     b.HasKey("TransactionId");
 
@@ -506,61 +508,61 @@ namespace DoGiaDung.Infrastructure.Data.Migrations
                 {
                     b.Property<int>("UserId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+                        .HasColumnType("int");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("UserId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UserId"));
 
                     b.Property<string>("CreatedBy")
                         .HasMaxLength(50)
-                        .HasColumnType("character varying(50)");
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<DateTime>("CreatedDt")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("DelYn")
                         .IsRequired()
                         .ValueGeneratedOnAdd()
                         .HasMaxLength(1)
-                        .HasColumnType("character varying(1)")
+                        .HasColumnType("nvarchar(1)")
                         .HasDefaultValue("N");
 
                     b.Property<string>("ErrorLogin")
                         .HasMaxLength(500)
-                        .HasColumnType("character varying(500)");
+                        .HasColumnType("nvarchar(500)");
 
                     b.Property<string>("PasswordHash")
                         .IsRequired()
                         .HasMaxLength(500)
-                        .HasColumnType("character varying(500)");
+                        .HasColumnType("nvarchar(500)");
 
                     b.Property<string>("ResetPasswordCode")
                         .HasMaxLength(200)
-                        .HasColumnType("character varying(200)");
+                        .HasColumnType("nvarchar(200)");
 
                     b.Property<string>("UpdatedBy")
                         .HasMaxLength(50)
-                        .HasColumnType("character varying(50)");
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<DateTime?>("UpdatedDt")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("UserAddress")
                         .HasMaxLength(500)
-                        .HasColumnType("character varying(500)");
+                        .HasColumnType("nvarchar(500)");
 
                     b.Property<string>("UserEmail")
                         .IsRequired()
                         .HasMaxLength(200)
-                        .HasColumnType("character varying(200)");
+                        .HasColumnType("nvarchar(200)");
 
                     b.Property<string>("UserName")
                         .IsRequired()
                         .HasMaxLength(100)
-                        .HasColumnType("character varying(100)");
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("UserPhone")
                         .HasMaxLength(20)
-                        .HasColumnType("character varying(20)");
+                        .HasColumnType("nvarchar(20)");
 
                     b.HasKey("UserId");
 

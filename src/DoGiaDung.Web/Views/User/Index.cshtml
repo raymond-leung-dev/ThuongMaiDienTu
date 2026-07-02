@@ -1,8 +1,8 @@
 @{
-    ViewData["Title"] = "Iniciar Sesión";
+    ViewData["Title"] = Lang.GetRaw("TTL_LOGIN");
 }
 
-<h2>Iniciar Sesión</h2>
+<h2>@Lang.Get("TTL_LOGIN")</h2>
 
 @if (!string.IsNullOrEmpty(ViewBag.Error))
 {
@@ -11,13 +11,14 @@
 
 <form method="post" asp-action="Login">
     <div class="mb-3">
-        <label>Email</label>
-        <input name="Email" type="email" class="form-control" required />
+        <label>@Lang.Get("LBL_EMAIL")</label>
+        <input name="Email" type="email" class="form-control" required placeholder="@Lang.GetRaw("PLH_EMAIL")" />
     </div>
     <div class="mb-3">
-        <label>Contraseña</label>
+        <label>@Lang.Get("LBL_PASSWORD")</label>
         <input name="Password" type="password" class="form-control" required />
     </div>
-    <button type="submit" class="btn btn-primary">Entrar</button>
-    <a asp-action="Register" class="btn btn-link">Registrarse</a>
+    <button type="submit" class="btn btn-primary">@Lang.Get("BTN_LOGIN")</button>
+    <a asp-action="Register" class="btn btn-link">@Lang.Get("NAV_REGISTER")</a>
+    <a asp-action="ForgotPassword" class="btn btn-link">@Lang.Get("BTN_FORGOT_PASS")</a>
 </form>

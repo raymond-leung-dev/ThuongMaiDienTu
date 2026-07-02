@@ -1,12 +1,12 @@
 @model DoGiaDung.Application.DTOs.CartDto
 @{
-    ViewData["Title"] = "Pago";
+    ViewData["Title"] = Lang.GetRaw("TTL_CHECKOUT");
 }
 
-<h2>Revisar pedido</h2>
+<h2>@Lang.Get("TTL_CHECKOUT")</h2>
 
 <table class="table">
-    <thead><tr><th>Producto</th><th>Cantidad</th><th>Total</th></tr></thead>
+    <thead><tr><th>@Lang.Get("TBL_PRODUCT_NAME")</th><th>@Lang.Get("LBL_QUANTITY")</th><th>@Lang.Get("LBL_TOTAL")</th></tr></thead>
     <tbody>
         @foreach (var item in Model.Items)
         {
@@ -18,18 +18,19 @@
         }
     </tbody>
     <tfoot>
-        <tr><td colspan="2" class="text-end fw-bold">Total:</td><td class="fw-bold">@Model.Total.ToString("C2", new System.Globalization.CultureInfo("es-ES"))</td></tr>
+        <tr><td colspan="2" class="text-end fw-bold">@Lang.Get("LBL_TOTAL"):</td><td class="fw-bold">@Model.Total.ToString("C2", new System.Globalization.CultureInfo("es-ES"))</td></tr>
     </tfoot>
 </table>
 
 <form method="post" asp-action="PlaceOrder">
     <div class="mb-3">
-        <label>Dirección de envío</label>
+        <label>@Lang.Get("LBL_SHIPPING_ADDRESS")</label>
         <input name="address" class="form-control" required />
     </div>
     <div class="mb-3">
-        <label>Mensaje (opcional)</label>
+        <label>@Lang.Get("LBL_ORDER_NOTE")</label>
         <textarea name="message" class="form-control"></textarea>
     </div>
-    <button type="submit" class="btn btn-success btn-lg">Pagar con Stripe</button>
+    <div class="text-danger mb-3" asp-validation-summary="All"></div>
+    <button type="submit" class="btn btn-success btn-lg">@Lang.Get("BTN_PAY_STRIPE")</button>
 </form>

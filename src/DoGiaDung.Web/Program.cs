@@ -11,6 +11,7 @@ builder.Services.AddInfrastructure(builder.Configuration);
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddHttpContextAccessor();
+builder.Services.AddScoped<DoGiaDung.Web.Helpers.Lang>();
 
 // ---- Cookie Auth ----
 builder.Services.AddAuthentication(Microsoft.AspNetCore.Authentication.Cookies
@@ -68,6 +69,13 @@ builder.Services.AddMemoryCache();
 
 var app = builder.Build();
 
+// ---- Seed Dictionary Data ----
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<DoGiaDung.Infrastructure.Data.AppDbContext>();
+    await DoGiaDung.Infrastructure.Data.DbInitializer.SeedAsync(db);
+}
+
 // ---- Middleware Pipeline ----
 if (!app.Environment.IsDevelopment())
 {
@@ -84,6 +92,15 @@ app.UseRateLimiter();
 
 // ---- Session ----
 app.UseSession();
+
+// ---- Language Cookie Middleware ----
+app.Use(async (context, next) =>
+{
+    var lang = context.Request.Cookies["lang"] ?? "ES";
+    var dictService = context.RequestServices.GetRequiredService<DoGiaDung.Application.Interfaces.IDictionaryService>();
+    dictService.SetLanguage(lang);
+    await next();
+});
 
 // ---- Localization ----
 app.UseRequestLocalization();

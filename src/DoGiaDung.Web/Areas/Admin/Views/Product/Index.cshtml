@@ -1,21 +1,21 @@
 @model IEnumerable<DoGiaDung.Application.DTOs.ProductDto>
 @{
-    ViewData["Title"] = "Productos";
+    ViewData["Title"] = Lang.GetRaw("TTL_PRODUCTS");
 }
 
 <div class="d-flex justify-content-between align-items-center mb-3">
-    <h1>Productos</h1>
-    <a asp-action="Create" class="btn btn-primary">+ Nuevo Producto</a>
+    <h1>@Lang.Get("TTL_PRODUCTS")</h1>
+    <a asp-action="Create" class="btn btn-primary">@Lang.Get("BTN_NEW_PRODUCT")</a>
 </div>
 
 <table class="table table-striped">
     <thead>
         <tr>
-            <th>Nombre</th>
-            <th>Precio</th>
-            <th>Stock</th>
-            <th>Categoría</th>
-            <th>Acciones</th>
+            <th>@Lang.Get("TBL_PRODUCT_NAME")</th>
+            <th>@Lang.Get("LBL_PRICE")</th>
+            <th>@Lang.Get("LBL_STOCK")</th>
+            <th>@Lang.Get("LBL_CATALOG")</th>
+            <th>@Lang.Get("TBL_ACTIONS")</th>
         </tr>
     </thead>
     <tbody>
@@ -29,10 +29,10 @@
                     <td>@(p.Quantity?.ToString() ?? "-")</td>
                     <td>@p.CatalogName</td>
                     <td>
-                        <a asp-action="Edit" asp-route-id="@p.ProductId" class="btn btn-sm btn-warning">Editar</a>
+                        <a asp-action="Edit" asp-route-id="@p.ProductId" class="btn btn-sm btn-warning">@Lang.Get("BTN_EDIT")</a>
                         <form asp-action="Delete" asp-route-id="@p.ProductId" method="post" class="d-inline"
-                              onsubmit="return confirm('¿Eliminar este producto?')">
-                            <button type="submit" class="btn btn-sm btn-danger">Eliminar</button>
+                              onsubmit="return confirm('@Lang.GetRaw("MSG_CONFIRM_DELETE")')">
+                            <button type="submit" class="btn btn-sm btn-danger">@Lang.Get("BTN_DELETE")</button>
                         </form>
                     </td>
                 </tr>

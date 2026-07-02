@@ -1,37 +1,40 @@
-@model DoGiaDung.Application.DTOs.ProductCreateDto
 @{
-    ViewData["Title"] = "Nuevo Producto";
+    ViewData["Title"] = Lang.GetRaw("TTL_NEW_PRODUCT");
 }
 
-<h1>Nuevo Producto</h1>
+<h1>@Lang.Get("TTL_NEW_PRODUCT")</h1>
 
 <form method="post" class="row g-3">
     <div class="col-md-6">
-        <label class="form-label">Nombre</label>
-        <input asp-for="ProductName" class="form-control" required />
+        <label class="form-label">@Lang.Get("TBL_PRODUCT_NAME")</label>
+        <input name="ProductName" class="form-control" required />
     </div>
     <div class="col-md-6">
-        <label class="form-label">Precio (€)</label>
-        <input asp-for="Price" class="form-control" type="number" step="0.01" required />
+        <label class="form-label">@Lang.Get("LBL_PRICE") (€)</label>
+        <input name="Price" class="form-control" type="number" step="0.01" required />
     </div>
     <div class="col-md-12">
-        <label class="form-label">Descripción</label>
-        <textarea asp-for="Description" class="form-control" rows="3"></textarea>
+        <label class="form-label">@Lang.Get("LBL_DESCRIPTION")</label>
+        <textarea name="Description" class="form-control" rows="3"></textarea>
     </div>
     <div class="col-md-4">
-        <label class="form-label">Stock</label>
-        <input asp-for="Quantity" class="form-control" type="number" />
+        <label class="form-label">@Lang.Get("LBL_STOCK")</label>
+        <input name="Quantity" class="form-control" type="number" />
     </div>
     <div class="col-md-4">
-        <label class="form-label">IVA (%)</label>
-        <select asp-for="VatRate" class="form-control">
-            <option value="0.21">21% - General</option>
-            <option value="0.10">10% - Reducido</option>
-            <option value="0.04">4% - Superreducido</option>
+        <label class="form-label">@Lang.Get("LBL_CATALOG")</label>
+        <input name="CatalogId" class="form-control" type="number" />
+    </div>
+    <div class="col-md-4">
+        <label class="form-label">IVA</label>
+        <select name="VatRate" class="form-control">
+            <option value="0.21">21% — @Lang.Get("LBL_VAT_GENERAL")</option>
+            <option value="0.10">10% — @Lang.Get("LBL_VAT_REDUCED")</option>
+            <option value="0.04">4% — @Lang.Get("LBL_VAT_SUPERREDUCED")</option>
         </select>
     </div>
     <div class="col-12">
-        <button type="submit" class="btn btn-primary">Guardar</button>
-        <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+        <button type="submit" class="btn btn-primary">@Lang.Get("BTN_SAVE")</button>
+        <a asp-action="Index" class="btn btn-secondary">@Lang.Get("BTN_CANCEL")</a>
     </div>
 </form>

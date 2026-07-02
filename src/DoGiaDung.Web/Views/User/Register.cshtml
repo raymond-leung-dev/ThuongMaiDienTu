@@ -1,8 +1,8 @@
 @{
-    ViewData["Title"] = "Registrarse";
+    ViewData["Title"] = Lang.GetRaw("TTL_REGISTER");
 }
 
-<h2>Crear una cuenta</h2>
+<h2>@Lang.Get("TTL_REGISTER")</h2>
 
 @if (!string.IsNullOrEmpty(ViewBag.Error))
 {
@@ -11,25 +11,25 @@
 
 <form method="post" asp-action="Register">
     <div class="mb-3">
-        <label>Nombre completo</label>
+        <label>@Lang.Get("LBL_FULL_NAME")</label>
         <input name="FullName" class="form-control" required />
     </div>
     <div class="mb-3">
-        <label>Email</label>
-        <input name="Email" type="email" class="form-control" required />
+        <label>@Lang.Get("LBL_EMAIL")</label>
+        <input name="Email" type="email" class="form-control" required placeholder="@Lang.GetRaw("PLH_EMAIL")" />
     </div>
     <div class="mb-3">
-        <label>Teléfono</label>
+        <label>@Lang.Get("LBL_PHONE")</label>
         <input name="Phone" type="tel" class="form-control" required placeholder="+34612345678" />
     </div>
     <div class="mb-3">
-        <label>Contraseña (min. 8 caracteres)</label>
+        <label>@Lang.Get("LBL_PASSWORD") (@Lang.Get("MSG_PASS_MIN"))</label>
         <input name="Password" type="password" class="form-control" required minlength="8" />
     </div>
     <div class="mb-3">
-        <label>Dirección</label>
+        <label>@Lang.Get("LBL_ADDRESS")</label>
         <input name="Address" class="form-control" />
     </div>
-    <button type="submit" class="btn btn-primary">Crear cuenta</button>
-    <a asp-action="Index" class="btn btn-link">Ya tengo cuenta</a>
+    <button type="submit" class="btn btn-primary">@Lang.Get("BTN_REGISTER")</button>
+    <a asp-action="Index" class="btn btn-link">@Lang.Get("MSG_ALREADY_ACCOUNT")</a>
 </form>

@@ -20,7 +20,7 @@ public static class DependencyInjection
         // ---- Database ----
         var connectionString = configuration.GetConnectionString("DefaultConnection");
         services.AddDbContext<AppDbContext>(options =>
-            options.UseNpgsql(connectionString));
+            options.UseSqlServer(connectionString));
 
         // ---- Repositories ----
         services.AddScoped(typeof(IRepository<>), typeof(EfRepository<>));

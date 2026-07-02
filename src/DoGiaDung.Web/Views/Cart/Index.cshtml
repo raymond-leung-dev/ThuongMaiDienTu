@@ -1,24 +1,24 @@
 @model DoGiaDung.Application.DTOs.CartDto
 @{
-    ViewData["Title"] = "Carrito";
+    ViewData["Title"] = Lang.GetRaw("TTL_CART");
 }
 
-<h2>Carrito de compras</h2>
+<h2>@Lang.Get("TTL_CART")</h2>
 
 @if (Model.IsEmpty)
 {
-    <p>Tu carrito está vacío.</p>
-    <a asp-controller="Product" asp-action="Index" class="btn btn-primary">Ver productos</a>
+    <p>@Lang.Get("MSG_EMPTY_CART")</p>
+    <a asp-controller="Product" asp-action="Index" class="btn btn-primary">@Lang.Get("BTN_SHOP_NOW")</a>
 }
 else
 {
     <table class="table">
         <thead>
             <tr>
-                <th>Producto</th>
-                <th>Precio</th>
-                <th>Cantidad</th>
-                <th>Total</th>
+                <th>@Lang.Get("TBL_PRODUCT_NAME")</th>
+                <th>@Lang.Get("LBL_PRICE")</th>
+                <th>@Lang.Get("LBL_QUANTITY")</th>
+                <th>@Lang.Get("LBL_TOTAL")</th>
                 <th></th>
             </tr>
         </thead>
@@ -26,22 +26,20 @@ else
             @foreach (var item in Model.Items)
             {
                 <tr>
-                    <td>
-                        <a asp-controller="Product" asp-action="Detail" asp-route-id="@item.ProductId">@item.ProductName</a>
-                    </td>
+                    <td><a asp-controller="Product" asp-action="Detail" asp-route-id="@item.ProductId">@item.ProductName</a></td>
                     <td>@item.PriceWithVat.ToString("C2", new System.Globalization.CultureInfo("es-ES"))</td>
                     <td>
                         <form asp-action="Update" method="post" class="d-flex align-items-center gap-2">
                             <input type="hidden" name="productId" value="@item.ProductId" />
                             <input name="quantity" type="number" value="@item.Quantity" min="1" class="form-control" style="width:70px" />
-                            <button type="submit" class="btn btn-sm btn-outline-secondary">Actualizar</button>
+                            <button type="submit" class="btn btn-sm btn-outline-secondary">@Lang.Get("BTN_UPDATE")</button>
                         </form>
                     </td>
                     <td>@item.Total.ToString("C2", new System.Globalization.CultureInfo("es-ES"))</td>
                     <td>
                         <form asp-action="Remove" method="post">
                             <input type="hidden" name="productId" value="@item.ProductId" />
-                            <button type="submit" class="btn btn-sm btn-danger">Eliminar</button>
+                            <button type="submit" class="btn btn-sm btn-danger">@Lang.Get("BTN_DELETE")</button>
                         </form>
                     </td>
                 </tr>
@@ -49,7 +47,7 @@ else
         </tbody>
         <tfoot>
             <tr>
-                <td colspan="3" class="text-end fw-bold">Total:</td>
+                <td colspan="3" class="text-end fw-bold">@Lang.Get("LBL_TOTAL"):</td>
                 <td class="fw-bold">@Model.Total.ToString("C2", new System.Globalization.CultureInfo("es-ES"))</td>
                 <td></td>
             </tr>
@@ -57,7 +55,7 @@ else
     </table>
 
     <div class="d-flex gap-2">
-        <a class="btn btn-success btn-lg" asp-controller="Checkout" asp-action="Index">Proceder al pago</a>
-        <a asp-controller="Product" asp-action="Index" class="btn btn-outline-primary">Seguir comprando</a>
+        <a class="btn btn-success btn-lg" asp-controller="Checkout" asp-action="Index">@Lang.Get("BTN_CHECKOUT")</a>
+        <a asp-controller="Product" asp-action="Index" class="btn btn-outline-primary">@Lang.Get("BTN_CONTINUE_SHOP")</a>
     </div>
 }

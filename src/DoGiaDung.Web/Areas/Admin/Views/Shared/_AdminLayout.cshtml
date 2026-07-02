@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="@(Context.Request.Cookies["lang"]?.ToLower() ?? "es")">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -11,7 +11,10 @@
     <nav class="navbar navbar-dark bg-dark">
         <div class="container-fluid">
             <a class="navbar-brand" asp-area="Admin" asp-controller="Home" asp-action="Index">DoGiaDung Admin</a>
-            <span class="text-light">@User.Identity?.Name</span>
+            <div class="d-flex align-items-center gap-3">
+                <partial name="../../Views/Shared/_LanguageSwitcher.cshtml" />
+                <span class="text-light">@User.Identity?.Name</span>
+            </div>
         </div>
     </nav>
 
@@ -19,9 +22,18 @@
         <div class="row">
             <nav class="col-md-2 d-none d-md-block bg-light sidebar py-3">
                 <ul class="nav flex-column">
-                    <li class="nav-item"><a class="nav-link" asp-area="Admin" asp-controller="Home" asp-action="Index">Dashboard</a></li>
-                    <li class="nav-item"><a class="nav-link" asp-area="Admin" asp-controller="Product" asp-action="Index">Productos</a></li>
-                    <li class="nav-item"><a class="nav-link" asp-controller="User" asp-action="Logout">Salir</a></li>
+                    <li class="nav-item"><a class="nav-link" asp-area="Admin" asp-controller="Home" asp-action="Index">@Lang.Get("NAV_DASHBOARD")</a></li>
+                    <li class="nav-item"><a class="nav-link" asp-area="Admin" asp-controller="Product" asp-action="Index">@Lang.Get("NAV_ADM_PRODUCTS")</a></li>
+                    <li class="nav-item"><a class="nav-link" asp-area="Admin" asp-controller="Catalog" asp-action="Index">@Lang.Get("NAV_ADM_CATALOGS")</a></li>
+                    <li class="nav-item"><a class="nav-link" asp-area="Admin" asp-controller="News" asp-action="Index">@Lang.Get("NAV_ADM_NEWS")</a></li>
+                    <li class="nav-item"><a class="nav-link" asp-area="Admin" asp-controller="Slide" asp-action="Index">@Lang.Get("NAV_ADM_SLIDES")</a></li>
+                    <li class="nav-item"><a class="nav-link" asp-area="Admin" asp-controller="Tag" asp-action="Index">@Lang.Get("NAV_ADM_TAGS")</a></li>
+                    <li class="nav-item"><a class="nav-link" asp-area="Admin" asp-controller="Transaction" asp-action="Index">@Lang.Get("NAV_ADM_ORDERS")</a></li>
+                    <li class="nav-item"><a class="nav-link" asp-area="Admin" asp-controller="User" asp-action="Index">@Lang.Get("NAV_ADM_USERS")</a></li>
+                    <li class="nav-item"><a class="nav-link" asp-area="Admin" asp-controller="Feedback" asp-action="Index">@Lang.Get("NAV_ADM_FEEDBACK")</a></li>
+                    <li class="nav-item"><hr /></li>
+                    <li class="nav-item"><a class="nav-link" asp-controller="Home" asp-action="Index" target="_blank">@Lang.Get("NAV_VIEW_SITE")</a></li>
+                    <li class="nav-item"><a class="nav-link" asp-controller="User" asp-action="Logout">@Lang.Get("NAV_LOGOUT")</a></li>
                 </ul>
             </nav>
             <main class="col-md-10 ms-sm-auto px-4 py-3">

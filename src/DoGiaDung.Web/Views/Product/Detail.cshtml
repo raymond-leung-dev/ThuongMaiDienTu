@@ -5,8 +5,8 @@
 
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Inicio</a></li>
-        <li class="breadcrumb-item"><a asp-action="Index">Productos</a></li>
+        <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">@Lang.Get("NAV_HOME")</a></li>
+        <li class="breadcrumb-item"><a asp-action="Index">@Lang.Get("NAV_PRODUCT")</a></li>
         <li class="breadcrumb-item active">@Model.ProductName</li>
     </ol>
 </nav>
@@ -21,18 +21,22 @@
     <div class="col-md-6">
         <h1>@Model.ProductName</h1>
         <h2 class="text-success">@Model.PriceWithVat.ToString("C2", new System.Globalization.CultureInfo("es-ES"))</h2>
-        <p><small class="text-muted">IVA @(Model.VatRate * 100)% incluido</small></p>
-
+        <p><small class="text-muted">@Lang.Get("MSG_VAT_INCLUDED") (@(Model.VatRate * 100)%)</small></p>
         <p>@Model.Description</p>
+
+        @if (Model.CatalogName != null)
+        {
+            <p>@Lang.Get("LBL_CATALOG"): @Model.CatalogName</p>
+        }
 
         @if (Model.Quantity.HasValue && Model.Quantity > 0)
         {
-            <p class="text-success">En stock</p>
-            <a asp-controller="Cart" asp-action="Add" asp-route-id="@Model.ProductId" class="btn btn-primary btn-lg">Añadir al Carrito</a>
+            <p class="text-success">@Lang.Get("MSG_IN_STOCK")</p>
+            <a asp-controller="Cart" asp-action="Add" asp-route-id="@Model.ProductId" class="btn btn-primary btn-lg">@Lang.Get("BTN_ADD_TO_CART")</a>
         }
         else
         {
-            <p class="text-danger">Agotado</p>
+            <p class="text-danger">@Lang.Get("MSG_OUT_OF_STOCK")</p>
         }
     </div>
 </div>
