@@ -1,0 +1,42 @@
+@model IEnumerable<DoGiaDung.Application.DTOs.ProductDto>
+@{
+    ViewData["Title"] = "Productos";
+}
+
+<h2>Productos</h2>
+
+<form class="row g-3 mb-4" method="get">
+    <div class="col-auto">
+        <input name="search" class="form-control" placeholder="Buscar productos..." value="@Context.Request.Query["search"]" />
+    </div>
+    <div class="col-auto">
+        <button type="submit" class="btn btn-primary">Buscar</button>
+    </div>
+</form>
+
+<div class="row">
+    @if (Model != null && Model.Any())
+    {
+        @foreach (var product in Model)
+        {
+            <div class="col-md-3 col-sm-6 mb-4">
+                <div class="card h-100">
+                    @if (!string.IsNullOrEmpty(product.ImageLink))
+                    {
+                        <img src="@product.ImageLink" class="card-img-top" alt="@product.ProductName" />
+                    }
+                    <div class="card-body">
+                        <h5 class="card-title">@product.ProductName</h5>
+                        <p class="card-text text-success fw-bold">@product.PriceWithVat.ToString("C2", new System.Globalization.CultureInfo("es-ES"))</p>
+                        <p class="card-text"><small class="text-muted">IVA incluido</small></p>
+                        <a asp-action="Detail" asp-route-id="@product.ProductId" class="btn btn-outline-primary">Ver</a>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+    else
+    {
+        <p>No hay productos disponibles.</p>
+    }
+</div>

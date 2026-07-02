@@ -26,6 +26,8 @@ public static class DependencyInjection
         services.AddScoped(typeof(IRepository<>), typeof(EfRepository<>));
 
         // ---- Services ----
+        services.AddScoped<IAuthService, AuthService>();
+        services.AddScoped<IProductService, ProductService>();
         services.AddScoped<IPaymentService, StripePaymentService>();
         services.AddScoped<IEmailService, SmtpEmailService>();
         services.AddScoped<IDictionaryService, CachedDictionaryService>();

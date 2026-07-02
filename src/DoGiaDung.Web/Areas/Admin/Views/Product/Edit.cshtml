@@ -1,0 +1,46 @@
+@model DoGiaDung.Application.DTOs.ProductDto
+@{
+    ViewData["Title"] = "Editar Producto";
+    var createDto = new DoGiaDung.Application.DTOs.ProductCreateDto(
+        Model.ProductName,
+        Model.Price,
+        Model.Description,
+        Model.Quantity,
+        Model.CatalogId,
+        Model.TagId,
+        Model.VatRate
+    );
+}
+
+<h1>Editar: @Model.ProductName</h1>
+
+<form method="post" class="row g-3">
+    <div class="col-md-6">
+        <label class="form-label">Nombre</label>
+        <input name="ProductName" value="@Model.ProductName" class="form-control" required />
+    </div>
+    <div class="col-md-6">
+        <label class="form-label">Precio (€)</label>
+        <input name="Price" value="@Model.Price" class="form-control" type="number" step="0.01" required />
+    </div>
+    <div class="col-md-12">
+        <label class="form-label">Descripción</label>
+        <textarea name="Description" class="form-control" rows="3">@Model.Description</textarea>
+    </div>
+    <div class="col-md-4">
+        <label class="form-label">Stock</label>
+        <input name="Quantity" value="@Model.Quantity" class="form-control" type="number" />
+    </div>
+    <div class="col-md-4">
+        <label class="form-label">IVA (%)</label>
+        <select name="VatRate" class="form-control">
+            <option value="0.21" selected="@(Model.VatRate == 0.21m)">21% - General</option>
+            <option value="0.10" selected="@(Model.VatRate == 0.10m)">10% - Reducido</option>
+            <option value="0.04" selected="@(Model.VatRate == 0.04m)">4% - Superreducido</option>
+        </select>
+    </div>
+    <div class="col-12">
+        <button type="submit" class="btn btn-primary">Guardar cambios</button>
+        <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+    </div>
+</form>
