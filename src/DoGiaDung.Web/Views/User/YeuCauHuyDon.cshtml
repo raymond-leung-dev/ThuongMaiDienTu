@@ -1,0 +1,8 @@
+@model DoGiaDung.Domain.Entities.Transaction
+@{ ViewData["Title"] = "Cancelar"; }
+<h2>Cancelar pedido #@Model.TransactionId</h2>
+<p>@Lang.Get("LBL_TOTAL"): @Model.Amount.ToString("C2", new System.Globalization.CultureInfo("es-ES"))</p>
+<form method="post">
+    <button type="submit" class="btn btn-danger">@Lang.Get("BTN_DELETE")</button>
+    <a asp-action="History" class="btn btn-secondary">@Lang.Get("BTN_CANCEL")</a>
+</form>

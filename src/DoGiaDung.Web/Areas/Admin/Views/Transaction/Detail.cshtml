@@ -1,0 +1,19 @@
+@model DoGiaDung.Domain.Entities.Transaction
+@{ ViewData["Title"] = "Pedido #" + Model.TransactionId; }
+<h1>@Lang.Get("TBL_ORDER_STATUS") #@Model.TransactionId</h1>
+<p><strong>@Lang.Get("LBL_EMAIL"):</strong> @Model.UserEmail</p>
+<p><strong>@Lang.Get("LBL_TOTAL"):</strong> @Model.Amount.ToString("C2", new System.Globalization.CultureInfo("es-ES"))</p>
+<p><strong>@Lang.Get("TBL_ORDER_STATUS"):</strong> @Lang.Get(Model.TransactionStatus.ToString())</p>
+<p><strong>@Lang.Get("TBL_ORDER_DATE"):</strong> @Model.TransactionCreated.ToString("dd/MM/yyyy HH:mm")</p>
+
+<h4>@Lang.Get("TBL_PRODUCT_NAME")</h4>
+<table class="table"><thead><tr><th>@Lang.Get("TBL_PRODUCT_NAME")</th><th>@Lang.Get("LBL_QUANTITY")</th><th>@Lang.Get("LBL_PRICE")</th></tr></thead><tbody>
+@foreach (var o in Model.Orders ?? new List<DoGiaDung.Domain.Entities.Order>())
+{
+    <tr>
+        <td>@(o.Product?.ProductName ?? Lang.GetRaw("MSG_NOT_FOUND"))</td>
+        <td>@o.Quantity</td>
+        <td>@o.Amount.ToString("C2", new System.Globalization.CultureInfo("es-ES"))</td>
+    </tr>
+}
+</tbody></table>

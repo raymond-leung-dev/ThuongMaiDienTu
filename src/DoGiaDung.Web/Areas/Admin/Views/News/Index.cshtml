@@ -1,0 +1,16 @@
+@model IEnumerable<DoGiaDung.Domain.Entities.News>
+@{ ViewData["Title"] = Lang.GetRaw("NAV_ADM_NEWS"); }
+<h1>@Lang.Get("NAV_ADM_NEWS")</h1>
+<a asp-action="Create" class="btn btn-primary mb-3">@Lang.Get("BTN_NEW_PRODUCT")</a>
+<table class="table"><thead><tr><th>@Lang.Get("TBL_PRODUCT_NAME")</th><th>@Lang.Get("TBL_ACTIONS")</th></tr></thead><tbody>
+@foreach (var n in Model ?? Enumerable.Empty<DoGiaDung.Domain.Entities.News>())
+{
+    <tr>
+        <td>@n.Title</td>
+        <td>
+            <a asp-action="Edit" asp-route-id="@n.NewsId" class="btn btn-sm btn-warning">@Lang.Get("BTN_EDIT")</a>
+            <form asp-action="Delete" asp-route-id="@n.NewsId" method="post" class="d-inline" onsubmit="return confirm('@Lang.GetRaw("MSG_CONFIRM_DELETE")')"><button type="submit" class="btn btn-sm btn-danger">@Lang.Get("BTN_DELETE")</button></form>
+        </td>
+    </tr>
+}
+</tbody></table>

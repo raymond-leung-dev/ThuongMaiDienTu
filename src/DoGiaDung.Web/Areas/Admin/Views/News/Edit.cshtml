@@ -1,0 +1,8 @@
+@model DoGiaDung.Domain.Entities.News
+@{ ViewData["Title"] = "Editar"; }
+<h1>@Lang.Get("BTN_EDIT"): @Model.Title</h1>
+<form method="post">
+    <div class="mb-3"><label>@Lang.Get("TBL_PRODUCT_NAME")</label><input name="Title" value="@Model.Title" class="form-control" /></div>
+    <div class="mb-3"><label>@Lang.Get("LBL_DESCRIPTION")</label><textarea name="Content" class="form-control" rows="5">@Model.Content</textarea></div>
+    <button type="submit" class="btn btn-primary">@Lang.Get("BTN_SAVE")</button>
+</form>

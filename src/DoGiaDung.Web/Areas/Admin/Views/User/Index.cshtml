@@ -1,0 +1,14 @@
+@model IEnumerable<DoGiaDung.Domain.Entities.User>
+@{ ViewData["Title"] = Lang.GetRaw("NAV_ADM_USERS"); }
+<h1>@Lang.Get("NAV_ADM_USERS")</h1>
+<table class="table"><thead><tr><th>@Lang.Get("TBL_USER_NAME")</th><th>@Lang.Get("LBL_EMAIL")</th><th>@Lang.Get("LBL_PHONE")</th><th>@Lang.Get("TBL_ACTIONS")</th></tr></thead><tbody>
+@foreach (var u in Model ?? Enumerable.Empty<DoGiaDung.Domain.Entities.User>())
+{
+    <tr>
+        <td>@u.UserName</td>
+        <td>@u.UserEmail</td>
+        <td>@u.UserPhone</td>
+        <td><a asp-action="Edit" asp-route-id="@u.UserId" class="btn btn-sm btn-warning">@Lang.Get("BTN_EDIT")</a></td>
+    </tr>
+}
+</tbody></table>

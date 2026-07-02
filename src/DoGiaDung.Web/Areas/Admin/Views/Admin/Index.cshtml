@@ -1,0 +1,9 @@
+@{
+    ViewData["Title"] = Lang.GetRaw("TTL_LOGIN");
+}
+<h2>@Lang.Get("TTL_LOGIN")</h2>
+<form method="post" asp-action="Login">
+    <div class="mb-3"><label>@Lang.Get("LBL_EMAIL")</label><input name="Email" class="form-control" /></div>
+    <div class="mb-3"><label>@Lang.Get("LBL_PASSWORD")</label><input name="Password" type="password" class="form-control" /></div>
+    <button type="submit" class="btn btn-primary">@Lang.Get("BTN_LOGIN")</button>
+</form>

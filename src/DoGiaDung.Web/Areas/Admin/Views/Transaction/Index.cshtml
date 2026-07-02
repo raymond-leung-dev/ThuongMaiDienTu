@@ -1,0 +1,16 @@
+@model IEnumerable<DoGiaDung.Domain.Entities.Transaction>
+@{ ViewData["Title"] = Lang.GetRaw("NAV_ADM_ORDERS"); }
+<h1>@Lang.Get("NAV_ADM_ORDERS")</h1>
+<table class="table"><thead><tr><th>ID</th><th>@Lang.Get("LBL_EMAIL")</th><th>@Lang.Get("LBL_TOTAL")</th><th>@Lang.Get("TBL_ORDER_STATUS")</th><th>@Lang.Get("TBL_ORDER_DATE")</th><th>@Lang.Get("TBL_ACTIONS")</th></tr></thead><tbody>
+@foreach (var t in Model ?? Enumerable.Empty<DoGiaDung.Domain.Entities.Transaction>())
+{
+    <tr>
+        <td>@t.TransactionId</td>
+        <td>@t.UserEmail</td>
+        <td>@t.Amount.ToString("C2", new System.Globalization.CultureInfo("es-ES"))</td>
+        <td>@Lang.Get(t.TransactionStatus.ToString())</td>
+        <td>@t.TransactionCreated.ToString("dd/MM/yyyy")</td>
+        <td><a asp-action="Detail" asp-route-id="@t.TransactionId" class="btn btn-sm btn-info">@Lang.Get("BTN_VIEW")</a></td>
+    </tr>
+}
+</tbody></table>

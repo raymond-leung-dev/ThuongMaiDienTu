@@ -1,0 +1,9 @@
+@model DoGiaDung.Domain.Entities.User
+@{ ViewData["Title"] = "Editar Usuario"; }
+<h1>@Lang.Get("BTN_EDIT"): @Model.UserName</h1>
+<form method="post">
+    <div class="mb-3"><label>@Lang.Get("LBL_EMAIL")</label><input name="UserEmail" value="@Model.UserEmail" class="form-control" /></div>
+    <div class="mb-3"><label>@Lang.Get("LBL_PHONE")</label><input name="UserPhone" value="@Model.UserPhone" class="form-control" /></div>
+    <div class="mb-3"><label>@Lang.Get("LBL_ADDRESS")</label><input name="UserAddress" value="@Model.UserAddress" class="form-control" /></div>
+    <button type="submit" class="btn btn-primary">@Lang.Get("BTN_SAVE")</button>
+</form>

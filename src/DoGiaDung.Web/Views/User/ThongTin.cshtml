@@ -1,0 +1,7 @@
+@model DoGiaDung.Domain.Entities.User
+@{ ViewData["Title"] = Lang.GetRaw("TTL_LOGIN"); }
+<h2>@Lang.Get("TTL_LOGIN")</h2>
+<p>@Lang.Get("LBL_EMAIL"): @Model.UserEmail</p>
+<p>@Lang.Get("LBL_FULL_NAME"): @Model.UserName</p>
+<p>@Lang.Get("LBL_PHONE"): @Model.UserPhone</p>
+<a asp-action="EditUser" asp-route-id="@Model.UserId" class="btn btn-primary">@Lang.Get("BTN_EDIT")</a>

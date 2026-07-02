@@ -1,0 +1,9 @@
+@model IEnumerable<DoGiaDung.Domain.Entities.Feedback>
+@{ ViewData["Title"] = Lang.GetRaw("NAV_ADM_FEEDBACK"); }
+<h1>@Lang.Get("NAV_ADM_FEEDBACK")</h1>
+<table class="table"><thead><tr><th>ID</th><th>@Lang.Get("TBL_USER_NAME")</th><th>@Lang.Get("LBL_DESCRIPTION")</th></tr></thead><tbody>
+@foreach (var f in Model ?? Enumerable.Empty<DoGiaDung.Domain.Entities.Feedback>())
+{
+    <tr><td>@f.FeedbackId</td><td>@f.UserId</td><td>@f.Message</td></tr>
+}
+</tbody></table>

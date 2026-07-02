@@ -1,0 +1,14 @@
+@model IEnumerable<DoGiaDung.Domain.Entities.Tag>
+@{ ViewData["Title"] = Lang.GetRaw("NAV_ADM_TAGS"); }
+<h1>@Lang.Get("NAV_ADM_TAGS")</h1>
+<table class="table"><thead><tr><th>@Lang.Get("TBL_PRODUCT_NAME")</th><th>@Lang.Get("TBL_ACTIONS")</th></tr></thead><tbody>
+@foreach (var t in Model ?? Enumerable.Empty<DoGiaDung.Domain.Entities.Tag>())
+{
+    <tr>
+        <td>@t.TagName</td>
+        <td>
+            <form asp-action="Delete" asp-route-id="@t.TagId" method="post" class="d-inline" onsubmit="return confirm('@Lang.GetRaw("MSG_CONFIRM_DELETE")')"><button type="submit" class="btn btn-sm btn-danger">@Lang.Get("BTN_DELETE")</button></form>
+        </td>
+    </tr>
+}
+</tbody></table>

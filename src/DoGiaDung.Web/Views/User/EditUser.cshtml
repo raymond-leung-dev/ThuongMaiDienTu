@@ -1,0 +1,9 @@
+@model DoGiaDung.Domain.Entities.User
+@{ ViewData["Title"] = Lang.GetRaw("BTN_EDIT"); }
+<h2>@Lang.Get("BTN_EDIT")</h2>
+<form method="post">
+    <div class="mb-3"><label>@Lang.Get("LBL_FULL_NAME")</label><input name="UserName" value="@Model.UserName" class="form-control" /></div>
+    <div class="mb-3"><label>@Lang.Get("LBL_PHONE")</label><input name="UserPhone" value="@Model.UserPhone" class="form-control" /></div>
+    <div class="mb-3"><label>@Lang.Get("LBL_ADDRESS")</label><input name="UserAddress" value="@Model.UserAddress" class="form-control" /></div>
+    <button type="submit" class="btn btn-primary">@Lang.Get("BTN_SAVE")</button>
+</form>

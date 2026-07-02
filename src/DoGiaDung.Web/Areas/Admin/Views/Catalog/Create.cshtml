@@ -1,0 +1,6 @@
+@{ ViewData["Title"] = "Nuevo"; }
+<h1>@Lang.Get("TTL_NEW_PRODUCT")</h1>
+<form method="post">
+    <div class="mb-3"><label>@Lang.Get("TBL_PRODUCT_NAME")</label><input name="CatalogName" class="form-control" required /></div>
+    <button type="submit" class="btn btn-primary">@Lang.Get("BTN_SAVE")</button>
+</form>

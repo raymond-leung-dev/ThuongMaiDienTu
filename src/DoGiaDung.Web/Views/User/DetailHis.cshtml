@@ -1,0 +1,5 @@
+@model DoGiaDung.Domain.Entities.Transaction
+@{ ViewData["Title"] = "Detalle"; }
+<h2>@Lang.Get("LBL_ORDER_STATUS") #@Model.TransactionId</h2>
+<p>@Lang.Get("LBL_TOTAL"): @Model.Amount.ToString("C2", new System.Globalization.CultureInfo("es-ES"))</p>
+<p>@Lang.Get("TBL_ORDER_STATUS"): @Model.TransactionStatus</p>
